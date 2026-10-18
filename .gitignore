@@ -1,3 +1,8 @@
 trades.csv
 .env
 __pycache__/
+/.gradle/
+/build/
+/local.properties
+/app/build/
+.kotlin/

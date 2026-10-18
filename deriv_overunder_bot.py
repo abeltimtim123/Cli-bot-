@@ -9,10 +9,9 @@ Flow (per developers.deriv.com):
 
 Setup:
   pip install websockets requests
-  export DERIV_PAT="pat_xxxxxxxx"            # Personal Access Token (scope: trade)
-  export DERIV_APP_ID="34HGYCZ0dMbpuObajLBQT"  # the App ID the PAT was created under
+  Add DERIV_PAT and DERIV_APP_ID to .env      # see .env.example
 
-Run (it asks for your App ID and token, then trades demo and real together):
+Run (defaults to demo and real together; use --account demo to avoid real trading):
   python deriv_overunder_bot.py --symbol R_100 --type over --barrier 2 --stake 1
 
 Digits on synthetic indices are random. This bot has no edge; the payout is
@@ -39,6 +38,24 @@ OTP_TTL_NOTE = "OTP is single-use and expires in 120s, so connect right after re
 
 def log(msg):
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
+
+
+def load_env_file(path):
+    """Load simple KEY=VALUE entries without overriding existing environment variables."""
+    try:
+        with open(path, encoding="utf-8") as env_file:
+            for line in env_file:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                key, value = key.strip(), value.strip()
+                if value[:1] == value[-1:] and value.startswith(("'", '"')):
+                    value = value[1:-1]
+                if key and key not in os.environ:
+                    os.environ[key] = value
+    except FileNotFoundError:
+        pass
 
 
 # --------------------------------------------------------------------------- REST
@@ -440,6 +457,9 @@ def parse_args():
 
 if __name__ == "__main__":
     try:
+        load_env_file(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
         asyncio.run(main_async(parse_args()))
     except KeyboardInterrupt:
         pass
+    except (RuntimeError, requests.RequestException) as e:
+        sys.exit(f"Error: {e}")
