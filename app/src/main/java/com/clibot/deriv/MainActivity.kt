@@ -516,7 +516,7 @@ class MainActivity : Activity() {
         this.hint = hint
         setText(value)
         textSize = 16f
-        singleLine = true
+        setSingleLine(true)
         setPadding(dp(12), dp(8), dp(12), dp(8))
         layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, dp(52)
