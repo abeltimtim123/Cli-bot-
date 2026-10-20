@@ -1,5 +1,23 @@
 # Cli-bot-
 
+## Web console (multi-screen website)
+
+A full browser console for the same Deriv Digit Over/Under bot, built for the new API
+(Personal Access Token -> one-time WebSocket link). Ten screens: Home, Connect, Dashboard,
+Strategy, Live Trading, History, Analytics, Risk Controls, Settings, Help & Guide.
+
+```sh
+cd web
+node server.js        # then open http://127.0.0.1:8080
+```
+
+No install step and no dependencies. The server listens on your own computer only and forwards
+`/proxy/*` to `api.derivws.com` so the browser avoids CORS problems (tick "Use local proxy" in
+Connect -> Advanced). Your token stays in the browser tab's session storage and is sent only to
+Deriv or your local proxy. Settings and trade history are kept in your browser. Real accounts need a
+typed `YES` before trading. `web/mock/mock.js` is a fake Deriv server used for browser tests and is
+never served by `server.js`.
+
 ## Android app
 
 An Android UI is included under `app/`. It supports the Deriv App ID and PAT,

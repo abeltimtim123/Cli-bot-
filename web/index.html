@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digit Bot Console</title>
+<meta name="description" content="Control room for a Deriv Digit Over/Under bot using the new PAT and OTP API.">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<a class="skip" href="#view">Skip to content</a>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="brand"><span class="logo">D</span><div><b>Digit Bot</b><small>Deriv Over / Under</small></div></div>
+    <nav id="nav" aria-label="Main"></nav>
+    <div class="side-foot"><span id="modeBadge" class="badge">Not connected</span></div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="icon-btn" id="burger" aria-label="Open menu">&#9776;</button>
+      <h1 id="pageTitle">Home</h1>
+      <div class="top-right">
+        <span id="runPill" class="pill idle">Idle</span>
+        <span id="pnlPill" class="pill">P&amp;L 0.00</span>
+      </div>
+    </header>
+    <div id="realBanner" class="banner" hidden>REAL ACCOUNT TRADING IS ACTIVE. Real money is at risk. <a href="#/dashboard">Open dashboard</a></div>
+    <main id="view" tabindex="-1"></main>
+  </div>
+</div>
+<div id="modal" class="modal"></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<script src="js/store.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
